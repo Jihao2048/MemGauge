@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>MemGauge</AssemblyName>
+    <RootNamespace>MemGauge</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>内存挂件</Product>
+    <AssemblyTitle>内存挂件</AssemblyTitle>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+</Project>

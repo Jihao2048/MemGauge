@@ -1,0 +1,20 @@
+## Build output
+bin/
+obj/
+publish/
+out/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## ReSharper / Rider
+_ReSharper*/
+.idea/
+
+## Windows
+Thumbs.db
+desktop.ini
