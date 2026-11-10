@@ -165,6 +165,7 @@ public static class Elevation
             {
                 UseShellExecute = true,
                 Verb = "runas",
+                Arguments = "--restarted", // 告诉新实例：旧实例正在退出，等一下互斥量
                 WorkingDirectory = AppContext.BaseDirectory
             });
             return true;

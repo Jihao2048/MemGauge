@@ -6,6 +6,11 @@ namespace MemGauge;
 
 public partial class App : Application
 {
+    private const string MutexName = @"Local\MemGauge.SingleInstance";
+
+    /// <summary>提权重启时，新进程可能比旧进程退得早，最多等这么久让它接班。</summary>
+    private static readonly TimeSpan RestartGrace = TimeSpan.FromSeconds(4);
+
     private Mutex? _singleInstance;
 
     protected override void OnStartup(StartupEventArgs e)
@@ -19,15 +24,32 @@ public partial class App : Application
             return;
         }
 
-        // 只允许跑一个挂件
-        _singleInstance = new Mutex(true, @"Local\MemGauge.SingleInstance", out var isFirst);
-        if (!isFirst)
+        // 提权重启：等旧实例把互斥量放开再接管
+        var restarted = e.Args.Any(a => string.Equals(a, "--restarted", StringComparison.OrdinalIgnoreCase));
+        if (!TryAcquireSingleInstance(restarted ? RestartGrace : TimeSpan.Zero))
         {
             Shutdown();
             return;
         }
 
         base.OnStartup(e);
+    }
+
+    private bool TryAcquireSingleInstance(TimeSpan grace)
+    {
+        var deadline = DateTime.UtcNow + grace;
+
+        while (true)
+        {
+            _singleInstance = new Mutex(true, MutexName, out var createdNew);
+            if (createdNew) return true;
+
+            _singleInstance.Dispose();
+            _singleInstance = null;
+
+            if (DateTime.UtcNow >= deadline) return false;
+            Thread.Sleep(120);
+        }
     }
 
     protected override void OnExit(ExitEventArgs e)
