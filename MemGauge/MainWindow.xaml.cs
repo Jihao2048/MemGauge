@@ -544,7 +544,11 @@ public partial class MainWindow : Window
 
     // ---------------------------------------------------------------- 悬停 / 拖动 / 点击
 
-    private void Root_MouseEnter(object sender, MouseEventArgs e) => _collapseTimer.Stop();
+    private void Root_MouseEnter(object sender, MouseEventArgs e)
+    {
+        _collapseTimer.Stop();
+        if (_collapsed) Expand();
+    }
 
     private void Root_MouseLeave(object sender, MouseEventArgs e)
     {
