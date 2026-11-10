@@ -10,6 +10,17 @@
 - **贴边吸附**：拖到屏幕边缘自动吸住；按钮式拖动，位置记在 `%APPDATA%\MemGauge\settings.json`。
 - 跟随系统深浅色、开机自启、始终置顶。
 
+## 图片
+
+<img width="110" height="110" alt="image" src="https://github.com/user-attachments/assets/0a378f62-b3bf-4179-8549-cf12a62a56a0" />
+
+<img width="37" height="130" alt="image" src="https://github.com/user-attachments/assets/cc425648-9f92-4c4b-aa58-78eccab238a9" />
+
+<img width="470" height="157" alt="image" src="https://github.com/user-attachments/assets/f9d73ec2-eaec-423f-ba91-67b2c56dd01a" />
+
+<img width="406" height="311" alt="image" src="https://github.com/user-attachments/assets/8725d441-eb30-496a-87c8-9d7fdf950a06" />
+
+
 ## 释放原理
 
 1. 遍历进程调用 `SetProcessWorkingSetSizeEx(h, -1, -1)`，把工作集页推回待机列表；
