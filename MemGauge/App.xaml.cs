@@ -15,6 +15,13 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        AppDomain.CurrentDomain.UnhandledException += (_, args) =>
+            Diag.Log("UnhandledException: " + args.ExceptionObject);
+        DispatcherUnhandledException += (_, args) =>
+        {
+            Diag.Log("DispatcherUnhandledException: " + args.Exception);
+            args.Handled = true;
+        };
         // 发一条示例通知，用来验证系统通知是否可用（不启动挂件）
         if (e.Args.Any(a => string.Equals(a, "--notify-test", StringComparison.OrdinalIgnoreCase)))
         {

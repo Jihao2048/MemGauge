@@ -550,6 +550,7 @@ public partial class MainWindow : Window
     private void Root_MouseEnter(object sender, MouseEventArgs e)
     {
         _collapseTimer.Stop();
+        RefreshLive();          // 看之前先刷一次，避免看到陈旧数值
         if (_collapsed) Expand();
     }
 
@@ -686,6 +687,9 @@ public partial class MainWindow : Window
     {
         var snapshot = MemorySnapshot.Capture();
 
+        // 定时器如果被意外停掉（休眠恢复、被别处 Stop 等），这里顺手拉起来
+        if (!_refreshTimer.IsEnabled) _refreshTimer.Start();
+
         Gauge.Value = snapshot.UsedPercent;
         TxtPercent.Text = $"{snapshot.UsedPercent:0}%";
 
@@ -767,7 +771,6 @@ public partial class MainWindow : Window
         _settings.Left = _ringLeft;
         _settings.Top = _ringTop;
         _settings.Save();
-        _refreshTimer.Stop();
         _collapseTimer.Stop();
         _startupTimer.Stop();
     }
