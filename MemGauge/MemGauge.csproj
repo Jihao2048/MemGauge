@@ -10,6 +10,7 @@
     <AssemblyName>MemGauge</AssemblyName>
     <RootNamespace>MemGauge</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <Product>内存挂件</Product>
     <AssemblyTitle>内存挂件</AssemblyTitle>
     <Version>1.0.0</Version>

@@ -32,6 +32,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 UninstallDisplayIcon={app}\{#AppExe}
 UninstallDisplayName={#AppName}
+SetupIconFile=..\MemGauge\icon.ico
 CloseApplications=yes
 RestartApplications=no
 SetupLogging=yes
