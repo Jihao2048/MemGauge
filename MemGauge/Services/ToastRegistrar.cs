@@ -127,9 +127,8 @@ internal static class ToastRegistrar
     }
 
     /// <summary>
-    /// 快捷方式是否已经注册过（只校验 AUMID 是否写在文件里）。
-    /// 不比对 exe 路径：安全软件常锁住开始菜单里的 lnk，改不动；
-    /// 而通知平台认的是 AUMID，指向哪份 exe 都能正常弹。
+    /// 快捷方式是否已经指向当前 exe 且带 AUMID。
+    /// 路径也要比对：装了新版本或换了目录时，旧快捷方式得改过来，否则点通知会拉起不存在的程序。
     /// </summary>
     private static bool IsShortcutCurrent(string shortcutPath, string exe)
     {
@@ -138,7 +137,7 @@ internal static class ToastRegistrar
             if (!File.Exists(shortcutPath)) return false;
 
             var bytes = File.ReadAllBytes(shortcutPath);
-            return Contains(bytes, Aumid);
+            return Contains(bytes, Aumid) && Contains(bytes, exe);
         }
         catch
         {

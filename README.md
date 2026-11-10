@@ -29,6 +29,12 @@
 
 第 2 步需要 `SeProfileSingleProcessPrivilege`，也就是**管理员权限**。普通权限下第 1 步仍能回收同用户进程的工作集（实测约 1GB），但待机列表清不掉。右键菜单里有「以管理员身份重启」。
 
+## 安装
+
+到 [Releases](../../releases) 下载 `MemGauge-<版本>-setup.exe` 双击安装，装到当前用户目录（`%LOCALAPPDATA%\Programs\MemGauge`），不需要管理员权限。
+
+安装时会创建开始菜单快捷方式，可选开机自启和桌面图标。
+
 ## 运行要求
 
 - Windows 10 1809 或更高
@@ -43,6 +49,14 @@ dotnet publish MemGauge/MemGauge.csproj -c Release -r win-x64 \
 ```
 
 也可以直接用 Visual Studio 打开 `MemGauge.sln`。
+
+打安装包需要 Inno Setup 6/7，编译脚本在 `installer/MemGauge.iss`：
+
+```bash
+"C:\Program Files\Inno Setup 7\ISCC.exe" installer\MemGauge.iss
+```
+
+产物在 `installer\Output\`。
 
 ## 说明
 

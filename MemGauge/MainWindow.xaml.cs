@@ -122,6 +122,9 @@ public partial class MainWindow : Window
         PlayEntrance();
         RefreshLive();
         _refreshTimer.Start();
+
+        // 后台补一次通知注册：安装包/其他程序可能覆盖掉带 AUMID 的开始菜单快捷方式
+        Task.Run(() => ToastRegistrar.EnsureRegistered());
     }
 
     /// <summary>
